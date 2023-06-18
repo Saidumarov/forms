@@ -7,49 +7,47 @@ const Input = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState("");
-  const [displayedNames, setDisplayedNames] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [Names, setNames] = useState([]);
+  const [search, setSearch] = useState("");
+  const [Open, setOpen] = useState(false);
 
   useEffect(() => {
-    const storedNames = JSON.parse(localStorage.getItem("names"));
-    if (storedNames) {
-      setDisplayedNames(storedNames);
+    const Names1 = JSON.parse(localStorage.getItem("names"));
+    if (Names1) {
+      setNames(Names1);
     }
   }, []);
 
   const handle = () => {
-    const updatedNames = [...displayedNames, { firstName, lastName, age }];
-    setDisplayedNames(updatedNames);
-    localStorage.setItem("names", JSON.stringify(updatedNames));
+    const updated = [...Names, { firstName, lastName, age }];
+    setNames(updated);
+    localStorage.setItem("names", JSON.stringify(updated));
     setFirstName("");
     setLastName("");
     setAge("");
-    setIsModalOpen(false);
+    setOpen(false);
     setModal(false);
   };
 
   const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
+    setSearch(e.target.value);
   };
 
   const [modal, setModal] = useState();
 
   const openModal = () => {
-    setIsModalOpen(true);
+    setOpen(true);
     setModal(true);
   };
 
-  const [backgroundColor, setBackgroundColor] = useState();
+  const [Color, setColor] = useState();
 
   useEffect(() => {
-    document.body.style.backgroundColor = backgroundColor;
-  }, [backgroundColor]);
+    document.body.style.backgroundColor = Color;
+  }, [Color]);
 
   const handleButtonClick = () => {
-    setBackgroundColor((Color) =>
-      Color === "#171923" ? "#171923" : "#171923"
-    );
+    setColor((Color) => (Color === "#171923" ? "#171923" : "#171923"));
     document.querySelector("nav").style.backgroundColor = "";
     document.querySelector(".con").style.backgroundColor = "";
     document.querySelectorAll(".res-con").forEach((e) => {
@@ -58,12 +56,13 @@ const Input = () => {
     document.querySelectorAll(".s").forEach((e) => {
       e.style.color = "";
     });
+    document.querySelector(".dum").style.backgroundColor = ""
     document.querySelector("modal , h2").style.color = "";
     document.querySelector(".img").style.zIndex = "-1";
     document.querySelector(".img1").style.zIndex = "1";
   };
   const handleButtonClick1 = () => {
-    setBackgroundColor((Color) => (Color === "white" ? "white" : "white"));
+    setColor((Color) => (Color === "white" ? "white" : "white"));
     document.querySelector("nav").style.backgroundColor = "#ebeff1";
     document.querySelector(".con").style.backgroundColor = "#E2E8F0";
     document.querySelectorAll(".res-con").forEach((e) => {
@@ -75,12 +74,13 @@ const Input = () => {
     document.querySelector("modal , h2").style.color = "#556E8B";
     document.querySelector(".img1").style.zIndex = "-1";
     document.querySelector(".img").style.zIndex = "1";
+    document.querySelector(".dum").style.backgroundColor = "rgb(204, 210, 215)"
   };
 
-  const filteredNames = displayedNames.filter(
+  const filter = Names.filter(
     ({ firstName, lastName }) =>
-      firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      lastName.toLowerCase().includes(searchTerm.toLowerCase())
+      firstName.toLowerCase().includes(search.toLowerCase()) ||
+      lastName.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -95,7 +95,7 @@ const Input = () => {
             <input
               type="text"
               placeholder="Search"
-              value={searchTerm}
+              value={search}
               onChange={handleSearch}
               className="search"
             />
@@ -120,7 +120,7 @@ const Input = () => {
       <div className="con">
         {modal && <div className="modall" style={{ display: "block" }}></div>}
 
-        {isModalOpen && (
+        {Open && (
           <div className="modal1">
             <input
               type="text"
@@ -156,22 +156,24 @@ const Input = () => {
         <div className="item-con">
           <div className="bush"></div>
 
-          {filteredNames.map(({ firstName, lastName, age }, index) => (
+          {filter.map(({ firstName, lastName, age }, index) => (
             <div key={index} className="res-con">
               <div className="pe">
                 <p className="p">
-
+                  {" "}
                   <span className="span">First Name:</span>
                   <span className="s"> {firstName}</span>
                 </p>
               </div>
               <div className="pe1">
+                {" "}
                 <p className="p1">
                   <span className="span">Last Name:</span>
                   <span className="s"> {lastName}</span>
                 </p>
               </div>
               <div className="pe2">
+                {" "}
                 <p className="p2">
                   <span className="span">Age:</span>{" "}
                   <span className="s">{age}</span>
