@@ -81,6 +81,7 @@ const Input = () => {
     ({ firstName, lastName }) =>
       firstName.toLowerCase().includes(search.toLowerCase()) ||
       lastName.toLowerCase().includes(search.toLowerCase())
+      
   );
 
   return (
@@ -145,9 +146,8 @@ const Input = () => {
 
             <button
               onClick={handle}
-              disabled={!firstName || !lastName || !age}
-              className="sav"
-            >
+              disabled={!firstName || !lastName || !age }
+              className="sav">
               Save
             </button>
           </div>

@@ -221,8 +221,7 @@ i {
     width: 40px;
     height: 40px;
     position: absolute;
-    /* z-index: -1; */
-    /* margin-left: -19px; */
+
 }
 
 .dum {
@@ -234,6 +233,7 @@ i {
     align-items: center;
     justify-content: center;
     margin: 20px 0 0 100px;
+    cursor: pointer;
 }
 
 
